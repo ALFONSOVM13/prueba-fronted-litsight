@@ -19,6 +19,8 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
   const [searchTerm, setSearchTerm] = useState("")
   const [activeSearchTerm, setActiveSearchTerm] = useState("")
   const [selectedTypes, setSelectedTypes] = useState<string[]>([])
+  const [suggestions, setSuggestions] = useState<Pokemon[]>([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   // Estados para ordenamiento
   const [sortField, setSortField] = useState<keyof Pokemon>("id")
@@ -32,6 +34,32 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
   useEffect(() => {
     loadPokemon()
   }, [currentPage, filters, sortField, sortOrder, viewMode])
+
+  useEffect(() => {
+    const getSuggestions = async () => {
+      if (searchTerm.length < 1) {
+        setSuggestions([])
+        setShowSuggestions(false)
+        return
+      }
+
+      try {
+        const response = await PokemonService.getProcessedPokemonList(
+          { search: searchTerm },
+          { field: "id", order: "asc" },
+          { page: 1, pageSize: 5 }
+        )
+        setSuggestions(response.data)
+        setShowSuggestions(true)
+      } catch (error) {
+        console.error("Error al obtener sugerencias:", error)
+        setSuggestions([])
+      }
+    }
+
+    const timeoutId = setTimeout(getSuggestions, 300)
+    return () => clearTimeout(timeoutId)
+  }, [searchTerm])
 
   const loadPokemon = async () => {
     try {
@@ -52,18 +80,39 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
+    if (value.length === 0) {
+      setShowSuggestions(false)
+    }
   }
 
   const executeSearch = () => {
     setCurrentPage(1)
     setActiveSearchTerm(searchTerm)
     setFilters((prev) => ({ ...prev, search: searchTerm }))
+    setShowSuggestions(false)
+    setTimeout(() => {
+      setSearchTerm("")
+    }, 100)
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       executeSearch()
+      setShowSuggestions(false)
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false)
     }
+  }
+
+  const handleSuggestionClick = (pokemon: Pokemon) => {
+    setSearchTerm(pokemon.name)
+    setFilters((prev) => ({ ...prev, search: pokemon.name }))
+    setCurrentPage(1)
+    setActiveSearchTerm(pokemon.name)
+    setShowSuggestions(false)
+    setTimeout(() => {
+      setSearchTerm("")
+    }, 100)
   }
 
   const handleTypeFilter = (types: string[]) => {
@@ -122,6 +171,8 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
     sortOrder,
     currentPage,
     totalPages,
+    suggestions,
+    showSuggestions,
     handleSearch,
     executeSearch,
     handleKeyPress,
@@ -131,6 +182,8 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
     handleRemoveSearchTerm,
     handleRemoveType,
     handleClearAllFilters,
+    handleSuggestionClick,
     setCurrentPage,
+    setShowSuggestions,
   }
 } 

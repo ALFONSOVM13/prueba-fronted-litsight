@@ -27,13 +27,17 @@ export default function HomePage() {
     sortOrder,
     currentPage,
     totalPages,
+    suggestions,
+    showSuggestions,
     handleSearch,
     executeSearch,
     handleKeyPress,
     handleTypeFilter,
     handleSort,
     handleTableSort,
+    handleSuggestionClick,
     setCurrentPage,
+    setShowSuggestions,
   } = usePokemonList({ viewMode });
 
   const handleViewDetails = (pokemon: Pokemon) => {
@@ -75,6 +79,10 @@ export default function HomePage() {
           onSearch={handleSearch}
           onExecuteSearch={executeSearch}
           onKeyDown={handleKeyPress}
+          suggestions={suggestions}
+          showSuggestions={showSuggestions}
+          onSuggestionClick={handleSuggestionClick}
+          setShowSuggestions={setShowSuggestions}
         />
 
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch lg:items-end pb-8">
