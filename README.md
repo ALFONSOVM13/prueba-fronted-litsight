@@ -1,37 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Pokémon Explorer
 
-## Getting Started
+Aplicación web desarrollada con **Next.js** que permite explorar los Pokémon de la primera generación (del 1 al 151) utilizando datos de la **[PokéAPI](https://pokeapi.co/)**. Los usuarios pueden consultar información detallada de cada Pokémon, incluyendo nombre, tipo, altura, peso y estadísticas base.
 
-First, run the development server:
+Este proyecto fue realizado como parte del desafío técnico para **Litsight**, con el objetivo de evaluar habilidades en consumo de APIs, manipulación de datos en el cliente, buenas prácticas de código y creación de interfaces modernas.
+
+---
+
+## 🔗 Demo en producción
+
+👉 [Ver Demo](https://prueba-fronted-litsight.vercel.app/)  
+
+---
+
+## 🖼️ Captura de pantalla
+
+![Captura de Pokémon Explorer](./public/screenshot.png)  
+
+---
+
+## ⚙️ Tecnologías utilizadas
+
+- [Next.js](https://nextjs.org/) – Framework React Full Stack
+- [Tailwind CSS](https://tailwindcss.com/) – Framework de estilos
+- [PokéAPI](https://pokeapi.co/) – API pública de datos Pokémon
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vercel](https://vercel.com/) – Deploy
+
+---
+
+## 📦 Instalación local
+
+1. **Clona el repositorio:**
+
+```bash
+git clone https://github.com/ALFONSOVM13/prueba-fronted-litsight.git
+
+2. **Navega al directorio del proyecto:**
+
+```bash
+cd prueba-fronted-litsight
+```
+
+3. **Instala las dependencias:**
+
+```bash
+npm install
+# o
+yarn install
+# o
+pnpm install
+```
+
+4. **Inicia el servidor de desarrollo:**
 
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. **Abre tu navegador:**
+   - La aplicación estará disponible en [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔍 Características principales
 
-## Learn More
+- Visualización de los 151 Pokémon de la primera generación
+- Búsqueda por nombre
+- Filtrado por tipo de Pokémon
+- Vista detallada con estadísticas, evoluciones y debilidades
+- Diseño responsivo
+- Interfaz moderna y amigable
+- Modo de vista en lista y tabla
+- Paginación
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# prueba-fronted-litsight.

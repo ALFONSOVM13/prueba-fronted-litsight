@@ -22,7 +22,6 @@ export default function HomePage() {
     error,
     tableSorting,
     searchTerm,
-    activeSearchTerm,
     selectedTypes,
     sortField,
     sortOrder,

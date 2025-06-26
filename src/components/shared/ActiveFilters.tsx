@@ -1,8 +1,8 @@
 "use client"
 
+import { POKEMON_TYPES } from "@/constants/pokemonTypes"
 import { X } from "lucide-react"
 import Button from "../ui/Button"
-import { POKEMON_TYPES } from "@/constants/pokemonTypes"
 
 interface ActiveFiltersProps {
   searchTerm?: string
@@ -27,7 +27,7 @@ export function ActiveFilters({
     <div className="flex flex-wrap gap-2 items-center">
       {searchTerm && (
         <div className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
-          <span>"{searchTerm}"</span>
+          <span>&ldquo;{searchTerm}&rdquo;</span>
           <button
             onClick={onRemoveSearchTerm}
             className="hover:bg-gray-200 rounded p-0.5"

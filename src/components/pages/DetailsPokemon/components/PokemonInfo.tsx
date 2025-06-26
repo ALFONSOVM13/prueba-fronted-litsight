@@ -6,10 +6,9 @@ interface PokemonInfoProps {
   weight: number
   height: number
   baseExperience: number | null
-  typeId?: string
 }
 
-export function PokemonInfo({ weight, height, baseExperience, typeId }: PokemonInfoProps) {
+export function PokemonInfo({ weight, height, baseExperience }: PokemonInfoProps) {
   const stats = [
     {
       label: "Peso",

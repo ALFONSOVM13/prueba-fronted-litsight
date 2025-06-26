@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"
-import type { Pokemon } from "@/types/pokemon"
 import type { PokemonFilters, SortOrder } from "@/services/pokemonService"
 import { PokemonService } from "@/services/pokemonService"
+import type { Pokemon } from "@/types/pokemon"
 import type { SortingState } from "@tanstack/react-table"
+import { useEffect, useState } from "react"
 
 interface UsePokemonListProps {
   viewMode: "grid" | "table"
@@ -43,7 +43,7 @@ export function usePokemonList({ viewMode }: UsePokemonListProps) {
       )
       setPokemonList(response.data)
       setTotalPages(response.totalPages)
-    } catch (err) {
+    } catch  {
       setError("Error al cargar los Pokémon")
     } finally {
       setLoading(false)

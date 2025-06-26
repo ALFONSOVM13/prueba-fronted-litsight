@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useState } from "react"
 
 interface SkeletonLoadingProps {
@@ -14,7 +15,7 @@ export const SkeletonLoading = ({ src, alt }: SkeletonLoadingProps) => {
   return (
     <div className="relative w-32 h-32">
       {isLoading && <div className="absolute inset-0 bg-slate-700/50 rounded-full animate-pulse" />}
-      <img
+      <Image
         src={src || "/placeholder.svg"}
         alt={alt}
         className={`w-32 h-32 object-contain transition-opacity duration-300 ${

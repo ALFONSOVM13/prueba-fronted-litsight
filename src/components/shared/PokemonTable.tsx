@@ -1,18 +1,18 @@
 "use client";
 
+import { POKEMON_TYPES } from "@/constants/pokemonTypes";
+import { Pokemon, PokemonType } from "@/types/pokemon";
 import {
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
   createColumnHelper,
   flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
   SortingState,
+  useReactTable,
 } from "@tanstack/react-table";
-import { Pokemon } from "@/types/pokemon";
-import { Eye, ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronDown, ChevronUp, Eye } from 'lucide-react';
 import Image from "next/image";
 import Button from "../ui/Button";
-import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 
 interface PokemonTableProps {
   data: Pokemon[];
@@ -57,7 +57,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Tipos",
       cell: (info) => (
         <div className="flex flex-wrap gap-1">
-          {info.getValue().map((type: any, index: number) => {
+          {info.getValue().map((type: PokemonType, index: number) => {
             const typeInfo = POKEMON_TYPES.find(t => t.id === type.type.name);
             return (
               <span
@@ -96,12 +96,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "hp",
       header: "Salud Base",
       cell: (info) => {
-        const hpStat = info.getValue().find((stat: any) => stat.stat.name === "hp");
+        const hpStat = info.getValue().find((stat) => stat.stat.name === "hp");
         return hpStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const hpA = rowA.original.stats.find((stat: any) => stat.stat.name === "hp")?.base_stat || 0;
-        const hpB = rowB.original.stats.find((stat: any) => stat.stat.name === "hp")?.base_stat || 0;
+        const hpA = rowA.original.stats.find((stat) => stat.stat.name === "hp")?.base_stat || 0;
+        const hpB = rowB.original.stats.find((stat) => stat.stat.name === "hp")?.base_stat || 0;
         return hpA - hpB;
       },
     }),
@@ -113,12 +113,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "attack",
       header: "Ataque Base",
       cell: (info) => {
-        const attackStat = info.getValue().find((stat: any) => stat.stat.name === "attack");
+        const attackStat = info.getValue().find((stat) => stat.stat.name === "attack");
         return attackStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const attackA = rowA.original.stats.find((stat: any) => stat.stat.name === "attack")?.base_stat || 0;
-        const attackB = rowB.original.stats.find((stat: any) => stat.stat.name === "attack")?.base_stat || 0;
+        const attackA = rowA.original.stats.find((stat) => stat.stat.name === "attack")?.base_stat || 0;
+        const attackB = rowB.original.stats.find((stat) => stat.stat.name === "attack")?.base_stat || 0;
         return attackA - attackB;
       },
     }),
@@ -126,12 +126,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "defense",
       header: "Defensa Base",
       cell: (info) => {
-        const defenseStat = info.getValue().find((stat: any) => stat.stat.name === "defense");
+        const defenseStat = info.getValue().find((stat) => stat.stat.name === "defense");
         return defenseStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const defenseA = rowA.original.stats.find((stat: any) => stat.stat.name === "defense")?.base_stat || 0;
-        const defenseB = rowB.original.stats.find((stat: any) => stat.stat.name === "defense")?.base_stat || 0;
+        const defenseA = rowA.original.stats.find((stat) => stat.stat.name === "defense")?.base_stat || 0;
+        const defenseB = rowB.original.stats.find((stat) => stat.stat.name === "defense")?.base_stat || 0;
         return defenseA - defenseB;
       },
     }),
@@ -139,12 +139,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "special-attack",
       header: "Ataque Especial",
       cell: (info) => {
-        const specialAttackStat = info.getValue().find((stat: any) => stat.stat.name === "special-attack");
+        const specialAttackStat = info.getValue().find((stat) => stat.stat.name === "special-attack");
         return specialAttackStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const specialAttackA = rowA.original.stats.find((stat: any) => stat.stat.name === "special-attack")?.base_stat || 0;
-        const specialAttackB = rowB.original.stats.find((stat: any) => stat.stat.name === "special-attack")?.base_stat || 0;
+        const specialAttackA = rowA.original.stats.find((stat) => stat.stat.name === "special-attack")?.base_stat || 0;
+        const specialAttackB = rowB.original.stats.find((stat) => stat.stat.name === "special-attack")?.base_stat || 0;
         return specialAttackA - specialAttackB;
       },
     }),
@@ -152,12 +152,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "special-defense",
       header: "Defensa Especial",
       cell: (info) => {
-        const specialDefenseStat = info.getValue().find((stat: any) => stat.stat.name === "special-defense");
+        const specialDefenseStat = info.getValue().find((stat) => stat.stat.name === "special-defense");
         return specialDefenseStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const specialDefenseA = rowA.original.stats.find((stat: any) => stat.stat.name === "special-defense")?.base_stat || 0;
-        const specialDefenseB = rowB.original.stats.find((stat: any) => stat.stat.name === "special-defense")?.base_stat || 0;
+        const specialDefenseA = rowA.original.stats.find((stat) => stat.stat.name === "special-defense")?.base_stat || 0;
+        const specialDefenseB = rowB.original.stats.find((stat) => stat.stat.name === "special-defense")?.base_stat || 0;
         return specialDefenseA - specialDefenseB;
       },
     }),
@@ -165,12 +165,12 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       id: "speed",
       header: "Velocidad",
       cell: (info) => {
-        const speedStat = info.getValue().find((stat: any) => stat.stat.name === "speed");
+        const speedStat = info.getValue().find((stat) => stat.stat.name === "speed");
         return speedStat?.base_stat || 0;
       },
       sortingFn: (rowA, rowB) => {
-        const speedA = rowA.original.stats.find((stat: any) => stat.stat.name === "speed")?.base_stat || 0;
-        const speedB = rowB.original.stats.find((stat: any) => stat.stat.name === "speed")?.base_stat || 0;
+        const speedA = rowA.original.stats.find((stat) => stat.stat.name === "speed")?.base_stat || 0;
+        const speedB = rowB.original.stats.find((stat) => stat.stat.name === "speed")?.base_stat || 0;
         return speedA - speedB;
       },
     }),

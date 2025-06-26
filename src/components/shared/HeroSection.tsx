@@ -1,6 +1,7 @@
 import { BoltIcon, PokeballIcon } from "@/icons/Icons";
 import Link from "next/link";
 import { Waves } from "../ui/Waves";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -33,11 +34,13 @@ export default function HeroSection() {
             <PokeballIcon aria-hidden="true" />
           </div>
           <div className="pokemon-image" role="img" aria-label="Mapa de la región de Kanto">
-            <img
+            <Image
               src="/images/kanto.webp"
-              width={488}
-              height={528}
+              width={500}
+              height={500}
               alt="Pokedex Kanto"
+              className="w-full h-full object-cover"
+              priority
             />
           </div>
         </div>

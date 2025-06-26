@@ -1,5 +1,4 @@
 import { POKEMON_TYPES } from "@/constants/pokemonTypes"
-import { ActiveFilters } from "../../shared/ActiveFilters"
 import MultiSelect from "../../ui/MultiSelect"
 
 interface PokemonFiltersProps {

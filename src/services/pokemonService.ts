@@ -46,6 +46,19 @@ export interface PaginatedResponse<T> {
     currentPage: number;
 }
 
+interface EvolutionChainResponse {
+    species: {
+        name: string;
+        url: string;
+    };
+    evolution_details: Array<{
+        min_level: number | null;
+        trigger?: { name: string };
+        item?: { name: string };
+    }>;
+    evolves_to: EvolutionChainResponse[];
+}
+
 /**
  * Servicio para gestionar las operaciones relacionadas con Pokémon
  */
@@ -239,7 +252,6 @@ export const PokemonService = {
      */
     getEvolutionChain: async (pokemonId: number): Promise<EvolutionChain> => {
         try {
-            // Primero obtenemos la especie del Pokémon que contiene el URL de la cadena de evolución
             const speciesResponse = await fetch(`${API_URL}-species/${pokemonId}`);
             if (!speciesResponse.ok) {
                 throw new Error(`Error al obtener la especie del Pokémon: ${speciesResponse.status}`);
@@ -254,7 +266,7 @@ export const PokemonService = {
             const evolutionData = await evolutionResponse.json();
 
             // Procesamos la cadena de evolución para obtener un formato más simple
-            const processEvolutionChain = async (chain: any): Promise<EvolutionChain> => {
+            const processEvolutionChain = async (chain: EvolutionChainResponse): Promise<EvolutionChain> => {
                 const evolution: EvolutionChain = {
                     name: chain.species.name,
                     id: Number(chain.species.url.split('/').slice(-2, -1)[0]),
