@@ -18,6 +18,8 @@ export const SkeletonLoading = ({ src, alt }: SkeletonLoadingProps) => {
       <Image
         src={src || "/placeholder.svg"}
         alt={alt}
+        width={1080}
+        height={1080}
         className={`w-32 h-32 object-contain transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
