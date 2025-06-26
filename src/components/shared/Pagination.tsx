@@ -97,7 +97,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         variant="primary"
-        className="bg-light text-dark"
         size="sm"
         aria-label="Página siguiente"
         rightIcon={<ChevronRight className="h-5 w-5" />}

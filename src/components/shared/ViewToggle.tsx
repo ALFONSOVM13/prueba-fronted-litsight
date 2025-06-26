@@ -16,7 +16,7 @@ export function ViewToggle({ viewMode, onViewChange }: ViewToggleProps) {
           flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
           ${
             viewMode === "grid"
-              ? "bg-white text-blue-600 shadow-sm border border-blue-200"
+              ? "bg-white text-orange-600 shadow-sm border border-orange-200"
               : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
           }
         `}
@@ -32,7 +32,7 @@ export function ViewToggle({ viewMode, onViewChange }: ViewToggleProps) {
           flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
           ${
             viewMode === "table"
-              ? "bg-white text-blue-600 shadow-sm border border-blue-200"
+              ? "bg-white text-orange-600 shadow-sm border border-orange-200"
               : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
           }
         `}

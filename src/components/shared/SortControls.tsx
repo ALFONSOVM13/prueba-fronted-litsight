@@ -30,7 +30,7 @@ export function SortControls({ sortField, sortOrder, onSort }: SortControlsProps
           flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
           ${
             sortField === "id"
-              ? "bg-white text-blue-600 shadow-sm border border-blue-200"
+              ? "bg-white text-orange-600 shadow-sm bord                                                                                                                            er border-orange-200"
               : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
           }
         `}
@@ -47,7 +47,7 @@ export function SortControls({ sortField, sortOrder, onSort }: SortControlsProps
           flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
           ${
             sortField === "name"
-              ? "bg-white text-blue-600 shadow-sm border border-blue-200"
+              ? "bg-white text-orange-600 shadow-sm border border-orange-200"
               : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
           }
         `}

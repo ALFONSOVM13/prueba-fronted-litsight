@@ -30,6 +30,9 @@ export interface Pokemon {
             'official-artwork': {
                 front_default: string;
             };
+            home: {
+                front_default: string;
+            };
         };
     };
     abilities: PokemonAbility[];
@@ -72,4 +75,13 @@ export interface PokemonAbility {
     };
     is_hidden: boolean;
     slot: number;
+}
+
+export interface EvolutionChain {
+    name: string;
+    id: number;
+    min_level: number | null;
+    trigger: string | null;
+    item: string | null;
+    evolutions: EvolutionChain[];
 } 

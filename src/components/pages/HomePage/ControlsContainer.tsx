@@ -12,18 +12,28 @@ interface ControlsContainerProps {
   onSort: (field: keyof Pokemon) => void
 }
 
-export function ControlsContainer({ viewMode, sortField, sortOrder, onViewChange, onSort }: ControlsContainerProps) {
+export function ControlsContainer({ 
+  viewMode, 
+  sortField, 
+  sortOrder, 
+  onViewChange, 
+  onSort 
+}: ControlsContainerProps) {
   return (
-    <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-start lg:mt-4">
-        <div className="flex-shrink-0">
-          <ViewToggle viewMode={viewMode} onViewChange={onViewChange} />
-        </div>
+    <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-end">
+      <div className="flex-shrink-0">
+        <ViewToggle viewMode={viewMode} onViewChange={onViewChange} />
+      </div>
 
-        {viewMode === "grid" && (
-          <div className="flex-shrink-0">
-            <SortControls sortField={sortField} sortOrder={sortOrder} onSort={onSort} />
-          </div>
-        )}
+      {viewMode === "grid" && (
+        <div className="flex-shrink-0">
+          <SortControls 
+            sortField={sortField} 
+            sortOrder={sortOrder} 
+            onSort={onSort} 
+          />
+        </div>
+      )}
     </div>
   )
 }

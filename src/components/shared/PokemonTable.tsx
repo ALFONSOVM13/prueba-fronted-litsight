@@ -12,6 +12,7 @@ import { Pokemon } from "@/types/pokemon";
 import { Eye, ChevronUp, ChevronDown } from 'lucide-react';
 import Image from "next/image";
 import Button from "../ui/Button";
+import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 
 interface PokemonTableProps {
   data: Pokemon[];
@@ -56,14 +57,21 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Tipos",
       cell: (info) => (
         <div className="flex flex-wrap gap-1">
-          {info.getValue().map((type: any, index: number) => (
-            <span
-              key={index}
-              className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-blue-100 text-blue-800 rounded-full text-[10px] sm:text-xs capitalize"
-            >
-              {type.type.name}
-            </span>
-          ))}
+          {info.getValue().map((type: any, index: number) => {
+            const typeInfo = POKEMON_TYPES.find(t => t.id === type.type.name);
+            return (
+              <span
+                key={index}
+                className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs capitalize"
+                style={{
+                  backgroundColor: typeInfo?.backgroundColor || '#A8A878',
+                  color: typeInfo?.color || '#FFFFFF'
+                }}
+              >
+                {type.type.name}
+              </span>
+            );
+          })}
         </div>
       ),
       sortingFn: (rowA, rowB) => {

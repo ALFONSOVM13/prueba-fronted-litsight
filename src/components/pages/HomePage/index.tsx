@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { usePokemonList } from "@/hooks/usePokemonList"
-import type { Pokemon } from "@/types/pokemon"
-import { useState } from "react"
-import Pagination from "../../shared/Pagination"
-import { PokemonModal } from "../../shared/PokemonModal"
-import { Loader } from "../../ui/Loader"
-import { ControlsContainer } from "./ControlsContainer"
-import { PokemonFilters } from "./PokemonFilters"
-import { PokemonList } from "./PokemonList"
-import { SearchBar } from "./SearchBar"
+import { usePokemonList } from "@/hooks/usePokemonList";
+import type { Pokemon } from "@/types/pokemon";
+import { useState } from "react";
+import Pagination from "../../shared/Pagination";
+import { PokemonModal } from "../../shared/PokemonModal";
+import { Loader } from "../../ui/Loader";
+import { ControlsContainer } from "./ControlsContainer";
+import { PokemonFilters } from "./PokemonFilters";
+import { PokemonList } from "./PokemonList";
+import { SearchBar } from "./SearchBar";
 
 export default function HomePage() {
-  const [modal, setModal] = useState(false)
-  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null)
-  const [viewMode, setViewMode] = useState<"grid" | "table">("grid")
+  const [modal, setModal] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
+  const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
 
   const {
     pokemonList,
@@ -38,25 +38,25 @@ export default function HomePage() {
     handleRemoveType,
     handleClearAllFilters,
     setCurrentPage,
-  } = usePokemonList({ viewMode })
+  } = usePokemonList({ viewMode });
 
   const handleViewDetails = (pokemon: Pokemon) => {
-    setSelectedPokemon(pokemon)
-    setModal(true)
-  }
+    setSelectedPokemon(pokemon);
+    setModal(true);
+  };
 
   const handleCloseModal = () => {
-    setModal(false)
-    setSelectedPokemon(null)
-  }
+    setModal(false);
+    setSelectedPokemon(null);
+  };
 
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-4">
-        <Loader/>
+        <Loader />
         <p className="text-base sm:text-xl">Cargando...</p>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -64,12 +64,14 @@ export default function HomePage() {
       <div className="min-h-screen flex items-center justify-center p-4">
         <p className="text-base sm:text-xl text-red-500">{error}</p>
       </div>
-    )
+    );
   }
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 max-w-7xl">
-      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">Explorador de Pokémon</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center">
+        Explorador de Pokémon
+      </h1>
 
       <div className="space-y-4 sm:space-y-6">
         <SearchBar
@@ -79,25 +81,23 @@ export default function HomePage() {
           onKeyDown={handleKeyPress}
         />
 
-        <div className="flex flex-col gap-4 sm:gap-6">
-          <div className="w-full">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch lg:items-end mb-6">
+          <div className="flex-1 min-w-0">
             <PokemonFilters
               selectedTypes={selectedTypes}
-              activeSearchTerm={activeSearchTerm}
               onTypeFilter={handleTypeFilter}
-              onRemoveSearchTerm={handleRemoveSearchTerm}
-              onRemoveType={handleRemoveType}
-              onClearAll={handleClearAllFilters}
             />
           </div>
 
-          <ControlsContainer
-            viewMode={viewMode}
-            sortField={sortField}
-            sortOrder={sortOrder}
-            onViewChange={setViewMode}
-            onSort={handleSort}
-          />
+          <div className="flex-shrink-0 lg:ml-auto">
+            <ControlsContainer
+              viewMode={viewMode}
+              sortField={sortField}
+              sortOrder={sortOrder}
+              onViewChange={setViewMode}
+              onSort={handleSort}
+            />
+          </div>
         </div>
 
         <PokemonList
@@ -125,5 +125,5 @@ export default function HomePage() {
         />
       )}
     </div>
-  )
-} 
+  );
+}

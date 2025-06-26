@@ -1,4 +1,4 @@
-import { Pokemon, PokemonListResponse } from '../types/pokemon';
+import { Pokemon, PokemonListResponse, EvolutionChain } from '../types/pokemon';
 
 /**
  * URL base de la API de Pokémon
@@ -229,6 +229,54 @@ export const PokemonService = {
         } catch (error) {
             console.error('Error en getProcessedPokemonList:', error);
             throw new Error('No se pudo procesar la lista de Pokémon');
+        }
+    },
+
+    /**
+     * Obtiene la cadena de evolución de un Pokémon
+     * @param pokemonId ID del Pokémon
+     * @returns Promise<EvolutionChain> Cadena de evolución del Pokémon
+     */
+    getEvolutionChain: async (pokemonId: number): Promise<EvolutionChain> => {
+        try {
+            // Primero obtenemos la especie del Pokémon que contiene el URL de la cadena de evolución
+            const speciesResponse = await fetch(`${API_URL}-species/${pokemonId}`);
+            if (!speciesResponse.ok) {
+                throw new Error(`Error al obtener la especie del Pokémon: ${speciesResponse.status}`);
+            }
+            const speciesData = await speciesResponse.json();
+            
+            // Obtenemos la cadena de evolución
+            const evolutionResponse = await fetch(speciesData.evolution_chain.url);
+            if (!evolutionResponse.ok) {
+                throw new Error(`Error al obtener la cadena de evolución: ${evolutionResponse.status}`);
+            }
+            const evolutionData = await evolutionResponse.json();
+
+            // Procesamos la cadena de evolución para obtener un formato más simple
+            const processEvolutionChain = async (chain: any): Promise<EvolutionChain> => {
+                const evolution: EvolutionChain = {
+                    name: chain.species.name,
+                    id: Number(chain.species.url.split('/').slice(-2, -1)[0]),
+                    min_level: chain.evolution_details[0]?.min_level || null,
+                    trigger: chain.evolution_details[0]?.trigger?.name || null,
+                    item: chain.evolution_details[0]?.item?.name || null,
+                    evolutions: []
+                };
+
+                if (chain.evolves_to?.length > 0) {
+                    for (const evo of chain.evolves_to) {
+                        evolution.evolutions.push(await processEvolutionChain(evo));
+                    }
+                }
+
+                return evolution;
+            };
+
+            return await processEvolutionChain(evolutionData.chain);
+        } catch (error) {
+            console.error('Error al obtener la cadena de evolución:', error);
+            throw new Error('No se pudo obtener la cadena de evolución');
         }
     }
 };

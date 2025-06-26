@@ -4,38 +4,23 @@ import MultiSelect from "../../ui/MultiSelect"
 
 interface PokemonFiltersProps {
   selectedTypes: string[]
-  activeSearchTerm: string
   onTypeFilter: (types: string[]) => void
-  onRemoveSearchTerm: () => void
-  onRemoveType: (type: string) => void
-  onClearAll: () => void
 }
 
 export function PokemonFilters({
   selectedTypes,
-  activeSearchTerm,
   onTypeFilter,
-  onRemoveSearchTerm,
-  onRemoveType,
-  onClearAll,
 }: PokemonFiltersProps) {
   return (
-    <>
+    <div className="flex-1 min-w-0">
       <MultiSelect
         options={POKEMON_TYPES}
         selectedValues={selectedTypes}
         onChange={onTypeFilter}
+        label="Filtrar por Tipos"
         placeholder="Seleccionar tipos de Pokémon..."
-        className="w-full lg:max-w-md my-4"
+        className="w-full"
       />
-
-      <ActiveFilters
-        searchTerm={activeSearchTerm}
-        selectedTypes={selectedTypes}
-        onRemoveSearchTerm={onRemoveSearchTerm}
-        onRemoveType={onRemoveType}
-        onClearAll={onClearAll}
-      />
-    </>
+    </div>
   )
-} 
+}
