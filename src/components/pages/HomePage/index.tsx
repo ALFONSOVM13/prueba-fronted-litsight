@@ -4,8 +4,8 @@ import { usePokemonList } from "@/hooks/usePokemonList";
 import type { Pokemon } from "@/types/pokemon";
 import { useState } from "react";
 import Pagination from "../../shared/Pagination";
-import { PokemonModal } from "../../shared/PokemonModal";
 import { Loader } from "../../ui/Loader";
+import { DetailsModal } from "../DetailsPokemon";
 import { ControlsContainer } from "./ControlsContainer";
 import { PokemonFilters } from "./PokemonFilters";
 import { PokemonList } from "./PokemonList";
@@ -34,9 +34,6 @@ export default function HomePage() {
     handleTypeFilter,
     handleSort,
     handleTableSort,
-    handleRemoveSearchTerm,
-    handleRemoveType,
-    handleClearAllFilters,
     setCurrentPage,
   } = usePokemonList({ viewMode });
 
@@ -81,7 +78,7 @@ export default function HomePage() {
           onKeyDown={handleKeyPress}
         />
 
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch lg:items-end mb-6">
+        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch lg:items-end pb-8">
           <div className="flex-1 min-w-0">
             <PokemonFilters
               selectedTypes={selectedTypes}
@@ -118,7 +115,7 @@ export default function HomePage() {
       </div>
 
       {modal && selectedPokemon && (
-        <PokemonModal
+        <DetailsModal
           pokemon={selectedPokemon}
           isOpen={modal}
           onClose={handleCloseModal}

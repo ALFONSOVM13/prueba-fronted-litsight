@@ -98,7 +98,6 @@ export function calculateWeaknesses(types: PokemonType[]): PokemonType[] {
   const immunities = new Set<PokemonType>();
   const resistances = new Set<PokemonType>();
 
-  // Collect all immunities, resistances and weaknesses
   types.forEach(type => {
     const effectiveness = TYPE_EFFECTIVENESS[type];
     effectiveness.immunities.forEach(t => immunities.add(t as PokemonType));
@@ -106,7 +105,6 @@ export function calculateWeaknesses(types: PokemonType[]): PokemonType[] {
     effectiveness.weaknesses.forEach(t => weaknesses.add(t as PokemonType));
   });
 
-  // Remove immunities and resistances from weaknesses
   const finalWeaknesses = Array.from(weaknesses).filter(type => 
     !immunities.has(type) && !resistances.has(type)
   );

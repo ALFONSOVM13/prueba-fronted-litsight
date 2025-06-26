@@ -52,7 +52,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
 
   return (
     <nav className="mt-8 flex flex-wrap justify-center items-center gap-2 px-4" aria-label="Paginación">
-      {/* Botón Inicio */}
       <Button
         onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
@@ -62,8 +61,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         aria-label="Ir a la primera página"
         leftIcon={<ChevronsLeft className="h-5 w-5" />}
       />
-
-      {/* Botón Anterior */}
       <Button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -77,7 +74,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <span className="hidden sm:inline">Anterior</span>
       </Button>
 
-      {/* Números de página */}
       <div className="flex gap-1">
         {getPageRange().map((page) => (
           <Button
@@ -92,7 +88,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         ))}
       </div>
 
-      {/* Botón Siguiente */}
       <Button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
@@ -104,7 +99,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <span className="hidden sm:inline">Siguiente</span>
       </Button>
 
-      {/* Botón Final */}
       <Button
         onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
@@ -115,7 +109,6 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         rightIcon={<ChevronsRight className="h-5 w-5" />}
       />
 
-      {/* Información de página (visible solo en móvil) */}
       <div className="w-full sm:hidden text-center text-sm text-gray-600 mt-2">
         Página {currentPage} de {totalPages}
       </div>

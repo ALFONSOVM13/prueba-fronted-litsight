@@ -1,8 +1,8 @@
 "use client"
 
-import { ArrowUpDown, Hash, Type, ChevronUp, ChevronDown } from "lucide-react"
-import type { Pokemon } from "@/types/pokemon"
 import type { SortOrder } from "@/services/pokemonService"
+import type { Pokemon } from "@/types/pokemon"
+import { ArrowUpDown, ChevronDown, ChevronUp, Hash, Type } from "lucide-react"
 
 interface SortControlsProps {
   sortField: keyof Pokemon

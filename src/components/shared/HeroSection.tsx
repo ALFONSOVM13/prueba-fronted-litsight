@@ -37,7 +37,7 @@ export default function HeroSection() {
               src="/images/kanto.webp"
               width={488}
               height={528}
-              alt="Mapa ilustrativo de la región de Kanto con sus ciudades y rutas principales"
+              alt="Pokedex Kanto"
             />
           </div>
         </div>
