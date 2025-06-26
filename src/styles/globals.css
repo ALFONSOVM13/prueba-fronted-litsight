@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilos para la barra de progreso */
+#nprogress .bar {
+  background: linear-gradient(90deg, #00ff1e 0%, #99ff00 100%) !important;
+  height: 3px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #00ff1a, 0 0 5px #93fc00 !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

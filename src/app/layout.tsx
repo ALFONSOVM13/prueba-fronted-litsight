@@ -1,6 +1,7 @@
 import MainLayout from '@/components/layout/MainLayout';
 import '@/styles/globals.css';
 import type { Metadata } from 'next';
+import { ProgressBar } from '@/components/ui/LoadingBar';
 
 export const metadata: Metadata = {
   title: 'Pokédex',
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
+        <ProgressBar />
         <MainLayout>{children}</MainLayout>
       </body>
     </html>
