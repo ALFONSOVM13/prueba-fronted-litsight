@@ -69,6 +69,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage === 1}
         variant="primary"
         size="sm"
+        className="bg-light text-dark"
+
         aria-label="Página anterior"
         leftIcon={<ChevronLeft className="h-5 w-5" />}
       >
@@ -81,7 +83,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
           <Button
             key={page}
             onClick={() => onPageChange(page)}
-            variant={currentPage === page ? 'primary' : 'ghost'}
+            variant={currentPage === page ? 'outline' : 'ghost'}
             size="sm"
             aria-current={currentPage === page ? 'page' : undefined}
           >
@@ -95,6 +97,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         variant="primary"
+        className="bg-light text-dark"
         size="sm"
         aria-label="Página siguiente"
         rightIcon={<ChevronRight className="h-5 w-5" />}

@@ -9,21 +9,22 @@ type PokemonTypeProps = {
   handleClick?: (e: SyntheticEvent) => void
 }
 
-export const PokemonType = ({ type, tabIndex, handleClick }: PokemonTypeProps) => {
-  const [{ name, backgroundColor }] = POKEMON_TYPES.filter((item) => item.id === type)
+export const PokemonType = ({ type, tabIndex, handleClick }: PokemonTypeProps) => {  
+  const [{ name, backgroundColor, color }] = POKEMON_TYPES.filter((item) => item?.id === type)
 
   return name && backgroundColor ? (
     <button
       onClick={handleClick}
       tabIndex={tabIndex ? 0 : -1}
       className="relative flex items-center gap-2 px-4 py-2 rounded-full
-                text-white text-sm font-semibold capitalize 
+                text-sm font-semibold capitalize 
                 shrink-0 overflow-hidden
                 hover:scale-105 hover:shadow-lg
                 transition-all duration-300 ease-out
                 border border-white/20"
       style={{
         background: `linear-gradient(135deg, ${backgroundColor}90 0%, ${backgroundColor} 100%)`,
+        color: color
       }}
     >
       {/* Efecto de brillo */}

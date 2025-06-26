@@ -2,7 +2,7 @@ import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 import { Pokemon } from "@/types/pokemon";
 import { SkeletonLoading } from "./SkeletonLoading";
 import { PokemonType } from "./PokemonType";
-import { Weight, Ruler, Zap, Sparkles } from 'lucide-react';
+import { Weight, Ruler, Zap, Sparkles } from "lucide-react";
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -16,7 +16,9 @@ export const PokemonCard = ({
   setPokemonData,
 }: PokemonCardProps) => {
   const imgUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`;
-  const backgroundColor = POKEMON_TYPES.find(type => type.id === pokemon.types[0].type.name)?.backgroundColor;
+  const backgroundColor = POKEMON_TYPES.find(
+    (type) => type.id === pokemon.types[0].type.name
+  )?.backgroundColor;
 
   const formatPokemonId = (id: number) => {
     if (id < 10) return `#00${id}`;
@@ -38,26 +40,26 @@ export const PokemonCard = ({
                  hover:scale-105 hover:border-slate-600/70
                  transition-all duration-500 ease-out
                  shadow-2xl hover:shadow-3xl
-                 cursor-pointer animate-fadeDown"
+                 cursor-pointer animate-fadeDown mt-10"
       onClick={handleCardClick}
     >
       {/* Gradiente de fondo dinámico */}
       <div
         className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500"
         style={{
-          background: `radial-gradient(circle at 50% 20%, ${backgroundColor}40 0%, transparent 70%)`
+          background: `radial-gradient(circle at 50% 20%, ${backgroundColor}40 0%, transparent 70%)`,
         }}
       />
-      
+
       {/* Efecto de brillo superior */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      
+
       {/* Efecto blur de color */}
       <div
         className="absolute top-8 left-1/2 -translate-x-1/2 w-40 h-40 rounded-full opacity-30 group-hover:opacity-50 transition-all duration-700"
-        style={{ 
+        style={{
           background: `radial-gradient(circle, ${backgroundColor}60 0%, ${backgroundColor}20 50%, transparent 100%)`,
-          filter: 'blur(60px)'
+          filter: "blur(60px)",
         }}
       />
 
@@ -66,7 +68,7 @@ export const PokemonCard = ({
         <div className="relative">
           <SkeletonLoading src={imgUrl} alt={pokemon.name} />
           {/* Sombra de la imagen */}
-          <div 
+          <div
             className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full opacity-30 blur-md"
             style={{ backgroundColor }}
           />
@@ -84,40 +86,52 @@ export const PokemonCard = ({
         </div>
 
         {/* Nombre del Pokémon */}
-        <h2 className="text-2xl font-bold capitalize text-center mb-4 text-white 
-                       group-hover:text-transparent group-hover:bg-clip-text 
+        <h2
+          className="text-2xl font-bold capitalize text-center mb-4 text-white 
+                        group-hover:bg-clip-text 
                        group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300
-                       transition-all duration-300">
+                       transition-all duration-300"
+        >
           {pokemon.name}
         </h2>
 
-        {/* Tipos */}
         <div className="flex gap-2 mb-6">
           {pokemon.types.map(({ type }) => (
             <PokemonType key={type.name} type={type.name} tabIndex={false} />
           ))}
         </div>
 
-        {/* Características mejoradas */}
         <div className="flex gap-8 mb-6 w-full justify-center">
           <div className="flex flex-col items-center group/stat">
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 
+            <div
+              className="flex items-center gap-2 p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 
                            group-hover/stat:bg-slate-700/50 group-hover/stat:border-slate-600/50 
-                           transition-all duration-300">
+                           transition-all duration-300"
+            >
               <Weight className="w-5 h-5 text-slate-400" />
-              <span className="font-bold text-white text-sm">{`${pokemon.weight / 10} kg`}</span>
+              <span className="font-bold text-white text-sm">{`${
+                pokemon.weight / 10
+              } kg`}</span>
             </div>
-            <span className="text-xs text-slate-400 mt-2 font-medium">Peso</span>
+            <span className="text-xs text-slate-400 mt-2 font-medium">
+              Peso
+            </span>
           </div>
-          
+
           <div className="flex flex-col items-center group/stat">
-            <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 
+            <div
+              className="flex items-center gap-2 p-3 rounded-xl bg-slate-800/50 border border-slate-700/50 
                            group-hover/stat:bg-slate-700/50 group-hover/stat:border-slate-600/50 
-                           transition-all duration-300">
+                           transition-all duration-300"
+            >
               <Ruler className="w-5 h-5 text-slate-400" />
-              <span className="font-bold text-white text-sm">{`${pokemon.height / 10} m`}</span>
+              <span className="font-bold text-white text-sm">{`${
+                pokemon.height / 10
+              } m`}</span>
             </div>
-            <span className="text-xs text-slate-400 mt-2 font-medium">Altura</span>
+            <span className="text-xs text-slate-400 mt-2 font-medium">
+              Altura
+            </span>
           </div>
         </div>
       </div>
@@ -128,8 +142,8 @@ export const PokemonCard = ({
                    text-base font-bold text-white rounded-b-3xl
                    relative overflow-hidden group/button
                    hover:shadow-lg transition-all duration-300"
-        style={{ 
-          background: `linear-gradient(135deg, ${backgroundColor}90 0%, ${backgroundColor} 100%)`
+        style={{
+          background: `linear-gradient(135deg, ${backgroundColor}90 0%, ${backgroundColor} 100%)`,
         }}
         onClick={(e) => {
           e.stopPropagation();
@@ -137,14 +151,15 @@ export const PokemonCard = ({
         }}
       >
         {/* Efecto de brillo en hover */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                       -translate-x-full group-hover/button:translate-x-full transition-transform duration-700" />
-        
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                       -translate-x-full group-hover/button:translate-x-full transition-transform duration-700"
+        />
+
         <Zap className="w-5 h-5 group-hover/button:rotate-12 transition-transform duration-300" />
         <span className="relative z-10">Más Detalles</span>
       </button>
 
-      {/* Decoración adicional */}
       <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/20" />
       <div className="absolute top-6 right-6 w-1 h-1 rounded-full bg-white/30" />
     </div>

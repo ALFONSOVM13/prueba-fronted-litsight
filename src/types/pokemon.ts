@@ -15,6 +15,8 @@ export interface Pokemon {
     name: string;
     height: number;
     weight: number;
+    base_experience: number;
+    stats: PokemonStat[];
     types: {
         slot: number;
         type: {
@@ -30,6 +32,7 @@ export interface Pokemon {
             };
         };
     };
+    abilities: PokemonAbility[];
 }
 
 export interface PokemonType {

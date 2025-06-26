@@ -145,7 +145,7 @@ export const PokemonService = {
             if (filters.search) {
                 const searchTerm = filters.search.toLowerCase();
                 return pokemon.name.toLowerCase().includes(searchTerm) ||
-                    pokemon.types.some(type => type.type.name.toLowerCase().includes(searchTerm));
+                    pokemon.id.toString().includes(searchTerm);
             }
 
             return true;

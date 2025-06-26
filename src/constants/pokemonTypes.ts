@@ -101,5 +101,11 @@ export const POKEMON_TYPES: PokemonTypeInfo[] = [
     name: 'Dragón',
     color: '#FFFFFF',
     backgroundColor: '#7038F8'
+  },
+  {
+    id: 'fairy',
+    name: 'Hada',
+    color: '#FFFFFF',
+    backgroundColor: '#EE99AC'
   }
 ]; 
