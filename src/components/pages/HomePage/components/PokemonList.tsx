@@ -1,7 +1,8 @@
+import { PokemonCard } from "@/components/shared/PokemonCard"
+import { PokemonTable } from "@/components/shared/PokemonTable"
 import type { Pokemon } from "@/types/pokemon"
 import type { SortingState } from "@tanstack/react-table"
-import { PokemonCard } from "../../shared/PokemonCard"
-import { PokemonTable } from "../../shared/PokemonTable"
+
 
 interface PokemonListProps {
   viewMode: "grid" | "table"

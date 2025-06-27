@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react'
-import Input from "../../ui/Input"
+import Input from "../../../ui/Input"
 import type { Pokemon } from '@/types/pokemon'
 import { useEffect, useRef } from 'react'
 

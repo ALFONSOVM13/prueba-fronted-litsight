@@ -1,24 +1,39 @@
-import { getTypeStyles, getTypeName } from "@/utils/styleUtils"
+import React from 'react';
+import Image from 'next/image';
+import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 
-interface PokemonTypesProps {
-  types: Array<{ type: { name: string } }>
+interface PokemonType {
+  type: {
+    name: string;
+  };
 }
 
-export function PokemonTypes({ types }: PokemonTypesProps) {
+interface PokemonTypesProps {
+  types: PokemonType[];
+}
+
+export const PokemonTypes: React.FC<PokemonTypesProps> = ({ types }) => {
   return (
-    <div className="flex justify-center gap-2 mb-6">
-      {types.map((type, index) => {
-        const styles = getTypeStyles(type.type.name)
+    <div className="flex flex-wrap gap-2">
+      {types.map(({ type }) => {
+        const typeInfo = POKEMON_TYPES.find((t) => t.id === type.name);
         return (
-          <span
-            key={index}
-            className="px-4 py-2 rounded-full text-sm font-semibold capitalize shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            style={styles}
+          <div
+            key={type.name}
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-white"
+            style={{ backgroundColor: typeInfo?.backgroundColor || '#A8A878' }}
           >
-            {getTypeName(type.type.name)}
-          </span>
-        )
+            <Image
+              src={`/icon/pokemonTypes/${type.name}.svg`}
+              alt={`${type.name} type`}
+              width={20}
+              height={20}
+              className="w-5 h-5"
+            />
+            <span className="capitalize">{type.name}</span>
+          </div>
+        );
       })}
     </div>
-  )
-} 
+  );
+}; 

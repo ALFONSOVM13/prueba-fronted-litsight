@@ -1,5 +1,5 @@
 import { POKEMON_TYPES } from "@/constants/pokemonTypes"
-import MultiSelect from "../../ui/MultiSelect"
+import MultiSelect from "../../../ui/MultiSelect"
 
 interface PokemonFiltersProps {
   selectedTypes: string[]

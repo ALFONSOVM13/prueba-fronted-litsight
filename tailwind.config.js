@@ -9,6 +9,9 @@ module.exports = {
     "./src/hooks/**/*.{js,jsx,ts,tsx}",
     "./src/services/**/*.{js,jsx,ts,tsx}",
     "./src/types/**/*.{js,jsx,ts,tsx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -24,12 +27,12 @@ module.exports = {
           }
         },
         shine: {
-          'from': {
-            transform: 'translateX(-100%)'
-          },
-          'to': {
-            transform: 'translateX(100%)'
-          }
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' }
+        },
+        'slow-spin': {
+          '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+          '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' }
         },
         'move-forever': {
           '0%': {
@@ -42,7 +45,8 @@ module.exports = {
       },
       animation: {
         'fadeDown': 'fadeDown 0.8s',
-        'shine': 'shine 1s linear infinite',
+        shine: 'shine 3s linear infinite',
+        'slow-spin': 'slow-spin 20s linear infinite',
         'move-forever': 'move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite'
       },
       boxShadow: {

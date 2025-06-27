@@ -1,97 +1,111 @@
-export const TYPE_EFFECTIVENESS = {
+export const typeEffectiveness: Record<
+  string,
+  { weak: string[]; resistant: string[]; immune: string[] }
+> = {
   normal: {
-    weaknesses: ['fighting'],
-    immunities: ['ghost'],
-    resistances: []
+    weak: ["fighting"],
+    resistant: [],
+    immune: ["ghost"],
   },
   fighting: {
-    weaknesses: ['flying', 'psychic', 'fairy'],
-    immunities: [],
-    resistances: ['rock', 'bug', 'dark']
+    weak: ["flying", "psychic", "fairy"],
+    resistant: ["rock", "bug", "dark"],
+    immune: [],
   },
   flying: {
-    weaknesses: ['rock', 'electric', 'ice'],
-    immunities: ['ground'],
-    resistances: ['fighting', 'bug', 'grass']
+    weak: ["electric", "ice", "rock"],
+    resistant: ["fighting", "bug", "grass"],
+    immune: ["ground"],
   },
   poison: {
-    weaknesses: ['ground', 'psychic'],
-    immunities: [],
-    resistances: ['fighting', 'poison', 'bug', 'grass', 'fairy']
+    weak: ["ground", "psychic"],
+    resistant: ["fighting", "poison", "bug", "grass", "fairy"],
+    immune: [],
   },
   ground: {
-    weaknesses: ['water', 'grass', 'ice'],
-    immunities: ['electric'],
-    resistances: ['poison', 'rock']
+    weak: ["water", "grass", "ice"],
+    resistant: ["poison", "rock"],
+    immune: ["electric"],
   },
   rock: {
-    weaknesses: ['fighting', 'ground', 'steel', 'water', 'grass'],
-    immunities: [],
-    resistances: ['normal', 'flying', 'poison', 'fire']
+    weak: ["water", "grass", "fighting", "ground", "steel"],
+    resistant: ["normal", "flying", "poison", "fire"],
+    immune: [],
   },
   bug: {
-    weaknesses: ['flying', 'rock', 'fire'],
-    immunities: [],
-    resistances: ['fighting', 'ground', 'grass']
+    weak: ["flying", "rock", "fire"],
+    resistant: ["fighting", "ground", "grass"],
+    immune: [],
   },
   ghost: {
-    weaknesses: ['ghost', 'dark'],
-    immunities: ['normal', 'fighting'],
-    resistances: ['poison', 'bug']
+    weak: ["ghost", "dark"],
+    resistant: ["poison", "bug"],
+    immune: ["normal", "fighting"],
   },
   steel: {
-    weaknesses: ['fighting', 'ground', 'fire'],
-    immunities: ['poison'],
-    resistances: ['normal', 'flying', 'rock', 'bug', 'steel', 'grass', 'psychic', 'ice', 'dragon', 'fairy']
+    weak: ["fighting", "ground", "fire"],
+    resistant: [
+      "normal",
+      "flying",
+      "rock",
+      "bug",
+      "steel",
+      "grass",
+      "psychic",
+      "ice",
+      "dragon",
+      "fairy",
+    ],
+    immune: ["poison"],
   },
   fire: {
-    weaknesses: ['ground', 'rock', 'water'],
-    immunities: [],
-    resistances: ['bug', 'steel', 'fire', 'grass', 'ice', 'fairy']
+    weak: ["water", "ground", "rock"],
+    resistant: ["bug", "steel", "fire", "grass", "ice", "fairy"],
+    immune: [],
   },
   water: {
-    weaknesses: ['grass', 'electric'],
-    immunities: [],
-    resistances: ['steel', 'fire', 'water', 'ice']
+    weak: ["grass", "electric"],
+    resistant: ["steel", "fire", "water", "ice"],
+    immune: [],
   },
   grass: {
-    weaknesses: ['flying', 'poison', 'bug', 'fire', 'ice'],
-    immunities: [],
-    resistances: ['ground', 'water', 'grass', 'electric']
+    weak: ["flying", "poison", "bug", "fire", "ice"],
+    resistant: ["ground", "water", "grass", "electric"],
+    immune: [],
   },
   electric: {
-    weaknesses: ['ground'],
-    immunities: [],
-    resistances: ['flying', 'steel', 'electric']
+    weak: ["ground"],
+    resistant: ["flying", "steel", "electric"],
+    immune: [],
   },
   psychic: {
-    weaknesses: ['bug', 'ghost', 'dark'],
-    immunities: [],
-    resistances: ['fighting', 'psychic']
+    weak: ["bug", "ghost", "dark"],
+    resistant: ["fighting", "psychic"],
+    immune: [],
   },
   ice: {
-    weaknesses: ['fighting', 'rock', 'steel', 'fire'],
-    immunities: [],
-    resistances: ['ice']
+    weak: ["fighting", "rock", "steel", "fire"],
+    resistant: ["ice"],
+    immune: [],
   },
   dragon: {
-    weaknesses: ['ice', 'dragon', 'fairy'],
-    immunities: [],
-    resistances: ['fire', 'water', 'grass', 'electric']
+    weak: ["ice", "dragon", "fairy"],
+    resistant: ["fire", "water", "grass", "electric"],
+    immune: [],
   },
   dark: {
-    weaknesses: ['fighting', 'bug', 'fairy'],
-    immunities: ['psychic'],
-    resistances: ['ghost', 'dark']
+    weak: ["fighting", "bug", "fairy"],
+    resistant: ["ghost", "dark"],
+    immune: ["psychic"],
   },
   fairy: {
-    weaknesses: ['poison', 'steel'],
-    immunities: ['dragon'],
-    resistances: ['fighting', 'bug', 'dark']
-  }
-} as const;
+    weak: ["poison", "steel"],
+    resistant: ["fighting", "bug", "dark"],
+    immune: ["dragon"],
+  },
+};
 
-export type PokemonType = keyof typeof TYPE_EFFECTIVENESS;
+export type PokemonType = keyof typeof typeEffectiveness;
 
 export function calculateWeaknesses(types: PokemonType[]): PokemonType[] {
   const weaknesses = new Set<PokemonType>();
@@ -99,10 +113,10 @@ export function calculateWeaknesses(types: PokemonType[]): PokemonType[] {
   const resistances = new Set<PokemonType>();
 
   types.forEach(type => {
-    const effectiveness = TYPE_EFFECTIVENESS[type];
-    effectiveness.immunities.forEach(t => immunities.add(t as PokemonType));
-    effectiveness.resistances.forEach(t => resistances.add(t as PokemonType));
-    effectiveness.weaknesses.forEach(t => weaknesses.add(t as PokemonType));
+    const effectiveness = typeEffectiveness[type];
+    effectiveness.immune.forEach(t => immunities.add(t as PokemonType));
+    effectiveness.resistant.forEach(t => resistances.add(t as PokemonType));
+    effectiveness.weak.forEach(t => weaknesses.add(t as PokemonType));
   });
 
   const finalWeaknesses = Array.from(weaknesses).filter(type => 

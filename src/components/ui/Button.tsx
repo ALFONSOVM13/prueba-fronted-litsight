@@ -26,7 +26,7 @@ export default function Button({
     secondary: 'bg-gray-200 text-black hover:bg-gray-300 focus:ring-gray-400',
     danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400',
     outline: 'border-2 border-red-600 text-red-600 hover:bg-red-50 focus:ring-red-400',
-    ghost: 'text-red-600 hover:bg-red-50 focus:ring-red-400',
+    ghost: 'text-white focus:ring-transparent focus:ring-offset-0',
     link: 'text-red-600 underline-offset-4 hover:underline focus:ring-red-400',
   };
 

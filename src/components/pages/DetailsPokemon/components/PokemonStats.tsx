@@ -12,8 +12,7 @@ export function PokemonStats({ stats }: PokemonStatsProps) {
   }
 
   return (
-    <div>
-      <h3 className="text-base sm:text-lg font-semibold mb-3 text-gray-800">Estadísticas Base</h3>
+    <div className="mt-4">
       <StatsHexagon
         stats={[
           { name: "HP", value: getStatValue("hp"), color: getStatColor(getStatValue("hp")) },

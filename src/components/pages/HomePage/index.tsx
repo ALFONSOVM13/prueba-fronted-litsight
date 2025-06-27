@@ -5,16 +5,17 @@ import type { Pokemon } from "@/types/pokemon";
 import { useState } from "react";
 import Pagination from "../../shared/Pagination";
 import { Loader } from "../../ui/Loader";
-import { DetailsModal } from "../DetailsPokemon";
-import { ControlsContainer } from "./ControlsContainer";
-import { PokemonFilters } from "./PokemonFilters";
-import { PokemonList } from "./PokemonList";
-import { SearchBar } from "./SearchBar";
+import { ControlsContainer } from "./components/ControlsContainer";
+import { PokemonFilters } from "./components/PokemonFilters";
+import { PokemonList } from "./components/PokemonList";
+import { SearchBar } from "./components/SearchBar";
+import PokemonDetail from "../DetailsPokemon";
 
 export default function HomePage() {
   const [modal, setModal] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+
 
   const {
     pokemonList,
@@ -49,6 +50,36 @@ export default function HomePage() {
     setModal(false);
     setSelectedPokemon(null);
   };
+
+  const filteredPokemon = pokemonList.filter(p => 
+    selectedTypes.length === 0 || 
+    p.types.some(t => selectedTypes.includes(t.type.name))
+  );
+
+  const handlePrevious = () => {
+    if (!selectedPokemon) return;
+    const currentIndex = filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
+    if (currentIndex > 0) {
+      setSelectedPokemon(filteredPokemon[currentIndex - 1]);
+    }
+  };
+  
+  const handleNext = () => {
+    if (!selectedPokemon) return;
+    const currentIndex = filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
+    if (currentIndex < filteredPokemon.length - 1) {
+      setSelectedPokemon(filteredPokemon[currentIndex + 1]);
+    }
+  };
+
+  const getCurrentPokemonIndex = () => {
+    if (!selectedPokemon) return -1;
+    return filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
+  };
+
+  const currentIndex = getCurrentPokemonIndex();
+  const previousPokemon = currentIndex > 0 ? filteredPokemon[currentIndex - 1] : undefined;
+  const nextPokemon = currentIndex < filteredPokemon.length - 1 ? filteredPokemon[currentIndex + 1] : undefined;
 
   if (loading) {
     return (
@@ -122,10 +153,18 @@ export default function HomePage() {
       </div>
 
       {modal && selectedPokemon && (
-        <DetailsModal
+        <PokemonDetail
           pokemon={selectedPokemon}
-          isOpen={modal}
           onClose={handleCloseModal}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          hasPrevious={currentIndex > 0}
+          hasNext={currentIndex < filteredPokemon.length - 1}
+          previousPokemon={previousPokemon}
+          nextPokemon={nextPokemon}
+          onPokemonChange={(newPokemon) => {
+            setSelectedPokemon(newPokemon);
+          }}
         />
       )}
     </div>
