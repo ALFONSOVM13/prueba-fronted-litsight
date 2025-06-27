@@ -1,18 +1,18 @@
+/**
+ * @fileoverview Componente que muestra los detalles completos de un Pokémon, incluyendo
+ * información básica, estadísticas y cadena de evolución.
+ */
+
 import Button from "@/components/ui/Button";
 import { Loader } from "@/components/ui/Loader";
 import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 import { PokemonService } from "@/services/pokemonService";
 import { EvolutionChain, Pokemon } from "@/types/pokemon";
 import {
-    ChevronLeft,
-    ChevronRight,
-    Heart,
-    Shield,
-    Swords,
-    X,
-    Zap
+  ChevronLeft,
+  ChevronRight,
+  X
 } from "lucide-react";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { BaseStats } from "./components/BaseStats";
 import { PokemonAbilities } from "./components/PokemonAbilities";
@@ -22,6 +22,19 @@ import { PokemonStats } from "./components/PokemonStats";
 import { PokemonTypes } from "./components/PokemonTypes";
 import { TypeEffectiveness } from "./components/TypeEffectiveness";
 
+/**
+ * Props para el componente PokemonDetail
+ * @interface PokemonDetailProps
+ * @property {Pokemon} pokemon - Objeto con la información completa del Pokémon a mostrar
+ * @property {() => void} onClose - Función para cerrar el detalle del Pokémon
+ * @property {() => void} onPrevious - Función para navegar al Pokémon anterior
+ * @property {() => void} onNext - Función para navegar al siguiente Pokémon
+ * @property {boolean} hasPrevious - Indica si existe un Pokémon anterior
+ * @property {boolean} hasNext - Indica si existe un siguiente Pokémon
+ * @property {Pokemon} [previousPokemon] - Información del Pokémon anterior (opcional)
+ * @property {Pokemon} [nextPokemon] - Información del siguiente Pokémon (opcional)
+ * @property {(newPokemon: Pokemon) => void} [onPokemonChange] - Callback cuando se cambia de Pokémon (opcional)
+ */
 interface PokemonDetailProps {
   pokemon: Pokemon;
   onClose: () => void;
@@ -33,11 +46,23 @@ interface PokemonDetailProps {
   nextPokemon?: Pokemon;
   onPokemonChange?: (newPokemon: Pokemon) => void;
 }
+
+/**
+ * Obtiene el color de fondo correspondiente al tipo de Pokémon
+ * @param {string} typeName - Nombre del tipo de Pokémon
+ * @returns {string} Color en formato hexadecimal
+ */
 const getTypeColor = (typeName: string) => {
   const typeInfo = POKEMON_TYPES.find((t) => t.id === typeName);
   return typeInfo?.backgroundColor || '#A8A878';
 };
 
+/**
+ * Componente que muestra una vista detallada de un Pokémon
+ * @component
+ * @param {PokemonDetailProps} props - Props del componente
+ * @returns {React.ReactElement} Elemento React con el detalle del Pokémon
+ */
 const PokemonDetail: React.FC<PokemonDetailProps> = ({
   pokemon,
   onClose,
@@ -45,8 +70,6 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
   onNext,
   hasPrevious,
   hasNext,
-  previousPokemon,
-  nextPokemon,
   onPokemonChange,
 }) => {
   const baseType = pokemon.types[0]?.type.name || "normal";
@@ -55,6 +78,9 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
   const [loadingEvolutions, setLoadingEvolutions] = useState(false);
   const [loadingPokemon, setLoadingPokemon] = useState(false);
 
+  /**
+   * Efecto que controla el scroll del body cuando el modal está abierto
+   */
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -62,6 +88,9 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
     };
   }, []);
 
+  /**
+   * Efecto que carga la cadena de evolución del Pokémon cuando cambia su ID
+   */
   useEffect(() => {
     const getEvolutionChain = async () => {
       if (pokemon.id) {
@@ -80,7 +109,10 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
     getEvolutionChain();
   }, [pokemon.id]);
 
-
+  /**
+   * Maneja el click en una evolución del Pokémon
+   * @param {number} pokemonId - ID del Pokémon seleccionado en la cadena de evolución
+   */
   const handleEvolutionClick = async (pokemonId: number) => {
     if (pokemonId === pokemon.id) return;
     
