@@ -134,19 +134,6 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
             className={`relative px-8 pt-6 pb-6`}
           >
             <div className="relative flex items-center justify-center h-80">
-              {hasPrevious && previousPokemon && (
-                <div className="absolute left-8 md:left-8 top-1/2 transform -translate-y-1/2 opacity-20">
-                  <img
-                    src={
-                      previousPokemon.sprites.other["official-artwork"]
-                        .front_default || previousPokemon.sprites.front_default
-                    }
-                    alt={previousPokemon.name}
-                    className="w-32 h-32 object-contain filter brightness-0"
-                  />
-                </div>
-              )}
-
               {hasPrevious && (
                 <Button
                   variant="ghost"
@@ -179,19 +166,6 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
                 >
                   <ChevronRight className="w-8 h-8 text-white" />
                 </Button>
-              )}
-
-              {hasNext && nextPokemon && (
-                <div className="absolute right-8 md:right-8 top-1/2 transform -translate-y-1/2 opacity-20">
-                  <img
-                    src={
-                      nextPokemon.sprites.other["official-artwork"]
-                        .front_default || nextPokemon.sprites.front_default
-                    }
-                    alt={nextPokemon.name}
-                    className="w-32 h-32 object-contain filter brightness-0"
-                  />
-                </div>
               )}
             </div>
 

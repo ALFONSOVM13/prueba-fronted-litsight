@@ -10,6 +10,7 @@ import { PokemonFilters } from "./components/PokemonFilters";
 import { PokemonList } from "./components/PokemonList";
 import { SearchBar } from "./components/SearchBar";
 import PokemonDetail from "../DetailsPokemon";
+import { PokemonService } from "@/services/pokemonService";
 
 export default function HomePage() {
   const [modal, setModal] = useState(false);
@@ -56,30 +57,39 @@ export default function HomePage() {
     p.types.some(t => selectedTypes.includes(t.type.name))
   );
 
-  const handlePrevious = () => {
+  const handlePrevious = async () => {
     if (!selectedPokemon) return;
-    const currentIndex = filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
-    if (currentIndex > 0) {
-      setSelectedPokemon(filteredPokemon[currentIndex - 1]);
+    if (selectedPokemon.id > 1) {
+      try {
+        const previousPokemon = await PokemonService.getPokemon((selectedPokemon.id - 1).toString());
+        setSelectedPokemon(previousPokemon);
+      } catch (error) {
+        console.error("Error al cargar el Pokémon anterior:", error);
+      }
     }
   };
   
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!selectedPokemon) return;
-    const currentIndex = filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
-    if (currentIndex < filteredPokemon.length - 1) {
-      setSelectedPokemon(filteredPokemon[currentIndex + 1]);
+    const maxPokemonId = parseInt(process.env.NEXT_PUBLIC_POKEMON_LIMIT || "151");
+    if (selectedPokemon.id < maxPokemonId) {
+      try {
+        const nextPokemon = await PokemonService.getPokemon((selectedPokemon.id + 1).toString());
+        setSelectedPokemon(nextPokemon);
+      } catch (error) {
+        console.error("Error al cargar el Pokémon siguiente:", error);
+      }
     }
   };
 
   const getCurrentPokemonIndex = () => {
     if (!selectedPokemon) return -1;
-    return filteredPokemon.findIndex(p => p.id === selectedPokemon.id);
+    return selectedPokemon.id;
   };
 
   const currentIndex = getCurrentPokemonIndex();
-  const previousPokemon = currentIndex > 0 ? filteredPokemon[currentIndex - 1] : undefined;
-  const nextPokemon = currentIndex < filteredPokemon.length - 1 ? filteredPokemon[currentIndex + 1] : undefined;
+  const hasPrevious = currentIndex > 1;
+  const hasNext = currentIndex < parseInt(process.env.NEXT_PUBLIC_POKEMON_LIMIT || "151");
 
   if (loading) {
     return (
@@ -158,10 +168,10 @@ export default function HomePage() {
           onClose={handleCloseModal}
           onPrevious={handlePrevious}
           onNext={handleNext}
-          hasPrevious={currentIndex > 0}
-          hasNext={currentIndex < filteredPokemon.length - 1}
-          previousPokemon={previousPokemon}
-          nextPokemon={nextPokemon}
+          hasPrevious={hasPrevious}
+          hasNext={hasNext}
+          previousPokemon={undefined}
+          nextPokemon={undefined}
           onPokemonChange={(newPokemon) => {
             setSelectedPokemon(newPokemon);
           }}
