@@ -1,7 +1,7 @@
-import { Search } from 'lucide-react'
-import Input from "../../../ui/Input"
 import type { Pokemon } from '@/types/pokemon'
+import { Search } from 'lucide-react'
 import { useEffect, useRef } from 'react'
+import Input from "../../../ui/Input"
 
 interface SearchBarProps {
   searchTerm: string
