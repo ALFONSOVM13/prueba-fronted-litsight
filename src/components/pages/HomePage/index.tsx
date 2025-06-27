@@ -1,16 +1,16 @@
 "use client";
 
 import { usePokemonList } from "@/hooks/usePokemonList";
+import { PokemonService } from "@/services/pokemonService";
 import type { Pokemon } from "@/types/pokemon";
 import { useState } from "react";
 import Pagination from "../../shared/Pagination";
 import { Loader } from "../../ui/Loader";
+import PokemonDetail from "../DetailsPokemon";
 import { ControlsContainer } from "./components/ControlsContainer";
 import { PokemonFilters } from "./components/PokemonFilters";
 import { PokemonList } from "./components/PokemonList";
 import { SearchBar } from "./components/SearchBar";
-import PokemonDetail from "../DetailsPokemon";
-import { PokemonService } from "@/services/pokemonService";
 
 export default function HomePage() {
   const [modal, setModal] = useState(false);
@@ -51,11 +51,6 @@ export default function HomePage() {
     setModal(false);
     setSelectedPokemon(null);
   };
-
-  const filteredPokemon = pokemonList.filter(p => 
-    selectedTypes.length === 0 || 
-    p.types.some(t => selectedTypes.includes(t.type.name))
-  );
 
   const handlePrevious = async () => {
     if (!selectedPokemon) return;
