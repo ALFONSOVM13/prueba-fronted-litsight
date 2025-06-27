@@ -1,6 +1,6 @@
-import React from "react";
-import { Heart, Shield, Swords, Zap } from "lucide-react";
 import { POKEMON_TYPES } from "@/constants/pokemonTypes";
+import { Heart, Shield, Swords, Zap } from "lucide-react";
+import React from "react";
 
 interface BaseStat {
   base_stat: number;
