@@ -89,7 +89,7 @@ export default function MultiSelect({
   return (
     <div className="w-ful">
       {label && (
-        <Label required={required} className="mb-1">
+        <Label required={required} className="mb-1 text-white">
           {label}
         </Label>
       )}
