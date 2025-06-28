@@ -8,6 +8,7 @@ import { Loader } from "@/components/ui/Loader";
 import { POKEMON_TYPES } from "@/constants/pokemonTypes";
 import { PokemonService } from "@/services/pokemonService";
 import { EvolutionChain, Pokemon } from "@/types/pokemon";
+import { cn } from "@/utils/cn";
 import {
   ChevronLeft,
   ChevronRight,
@@ -232,41 +233,68 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
               )}
             </div>
 
-            <div className="flex justify-center gap-8 text-light mb-4">
-              <Button
-                variant="ghost"
+            <nav className="relative flex flex-wrap justify-center gap-4 md:gap-12 text-light mb-4 px-4 md:px-0 border-b border-white/10">
+              <div
+                role="tab"
+                tabIndex={0}
                 onClick={() => setActiveTab("about")}
-                className={`!pb-2 !px-4 font-semibold ${
+                onKeyDown={(e) => e.key === 'Enter' && setActiveTab("about")}
+                className={cn(
+                  "cursor-pointer py-2",
+                  "text-sm md:text-base font-medium",
+                  "transition-colors duration-200",
+                  "hover:text-white relative",
+                  "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300",
                   activeTab === "about"
-                    ? "border-b-2 border-white"
-                    : "opacity-70"
-                }`}
+                    ? "text-white after:w-full"
+                    : "text-white/70 after:w-0"
+                )}
+                aria-selected={activeTab === "about"}
+                data-state={activeTab === "about" ? "active" : "inactive"}
               >
                 Información básica
-              </Button>
-              <Button
-                variant="ghost"
+              </div>
+              <div
+                role="tab"
+                tabIndex={0}
                 onClick={() => setActiveTab("stats")}
-                className={`!pb-2 !px-4 font-semibold ${
+                onKeyDown={(e) => e.key === 'Enter' && setActiveTab("stats")}
+                className={cn(
+                  "cursor-pointer py-2",
+                  "text-sm md:text-base font-medium",
+                  "transition-colors duration-200",
+                  "hover:text-white relative",
+                  "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300",
                   activeTab === "stats"
-                    ? "border-b-2 border-white"
-                    : "opacity-70"
-                }`}
+                    ? "text-white after:w-full"
+                    : "text-white/70 after:w-0"
+                )}
+                aria-selected={activeTab === "stats"}
+                data-state={activeTab === "stats" ? "active" : "inactive"}
               >
                 Estadísticas
-              </Button>
-              <Button
-                variant="ghost"
+              </div>
+              <div
+                role="tab"
+                tabIndex={0}
                 onClick={() => setActiveTab("evolution")}
-                className={`!pb-2 !px-4 font-semibold ${
+                onKeyDown={(e) => e.key === 'Enter' && setActiveTab("evolution")}
+                className={cn(
+                  "cursor-pointer py-2",
+                  "text-sm md:text-base font-medium",
+                  "transition-colors duration-200",
+                  "hover:text-white relative",
+                  "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-white after:transition-all after:duration-300",
                   activeTab === "evolution"
-                    ? "border-b-2 border-white"
-                    : "opacity-70"
-                }`}
+                    ? "text-white after:w-full"
+                    : "text-white/70 after:w-0"
+                )}
+                aria-selected={activeTab === "evolution"}
+                data-state={activeTab === "evolution" ? "active" : "inactive"}
               >
                 Evolución
-              </Button>
-            </div>
+              </div>
+            </nav>
           </div>
 
           <div className="bg-white rounded-t-3xl -mt-8 relative w-full px-12 py-10">
