@@ -61,7 +61,7 @@ export function SearchBar({
             onExecuteSearch()
             setShowSuggestions(false)
           }}
-          className="absolute right-2 p-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-600/30"
+          className="absolute right-2 p-3 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-light shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-orange-600/30"
           aria-label="Buscar Pokémon"
         >
           <Search className="w-5 h-5" />

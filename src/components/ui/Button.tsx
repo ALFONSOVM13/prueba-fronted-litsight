@@ -22,12 +22,12 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const variants = {
-    primary: 'bg-orange-600 text-white hover:bg-orange-700 focus:ring-orange-500',
+    primary: 'bg-orange-600 text-light hover:bg-orange-700 focus:ring-orange-500',
     secondary: 'bg-gray-200 text-black hover:bg-gray-300 focus:ring-gray-400',
-    danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-400',
-    outline: 'border-2 border-red-600 text-red-600 hover:bg-red-50 focus:ring-red-400',
-    ghost: 'text-white focus:ring-transparent focus:ring-offset-0',
-    link: 'text-red-600 underline-offset-4 hover:underline focus:ring-red-400',
+    danger: 'bg-orange-500 text-light hover:bg-orange-600 focus:ring-orange-400',
+    outline: 'border-2 border-orange-600 text-orange-600 hover:bg-orange-50 focus:ring-orange-400',
+    ghost: 'text-light focus:ring-transparent focus:ring-offset-0',
+    link: 'text-orange-600 underline-offset-4 hover:underline focus:ring-orange-400',
   };
 
   const sizes = {

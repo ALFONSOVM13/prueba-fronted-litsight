@@ -10,7 +10,7 @@ export const TypeBadge: React.FC<TypeBadgeProps> = ({ type }) => {
   const typeInfo = POKEMON_TYPES.find((t) => t.id === type);
   return (
     <div
-      className="flex items-center gap-2 px-3 py-1 rounded-full text-white text-sm capitalize"
+      className="flex items-center gap-2 px-3 py-1 rounded-full text-light text-sm capitalize"
       style={{ backgroundColor: typeInfo?.backgroundColor || '#A8A878' }}
     >
       <Image

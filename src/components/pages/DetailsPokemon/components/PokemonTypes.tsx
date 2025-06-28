@@ -20,7 +20,7 @@ export const PokemonTypes: React.FC<PokemonTypesProps> = ({ types }) => {
         return (
           <div
             key={type.name}
-            className="flex items-center gap-2 px-4 py-2 rounded-full text-white"
+            className="flex items-center gap-2 px-4 py-2 rounded-full text-light"
             style={{ backgroundColor: typeInfo?.backgroundColor || '#A8A878' }}
           >
             <Image

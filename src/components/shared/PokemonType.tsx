@@ -11,7 +11,7 @@ export const PokemonType = ({ type, tabIndex = true }: PokemonTypeProps) => {
 
   return (
     <span
-      className="px-3 py-1 rounded-full text-white text-sm font-semibold capitalize shadow-lg"
+      className="px-3 py-1 rounded-full text-light text-sm font-semibold capitalize shadow-lg"
       style={{ backgroundColor }}
       tabIndex={tabIndex ? 0 : -1}
     >

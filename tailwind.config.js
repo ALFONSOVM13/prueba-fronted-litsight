@@ -15,6 +15,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        dark: '#060B28',
+        light: '#F5F5F5',
+      },
       keyframes: {
         fadeDown: {
           'from': {
@@ -41,13 +45,27 @@ module.exports = {
           '100%': {
             transform: 'translate3d(85px, 0, 0)'
           }
+        },
+        zoomIn: {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.3)'
+          },
+          '50%': {
+            opacity: '0.8'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scale(1)'
+          }
         }
       },
       animation: {
         'fadeDown': 'fadeDown 0.8s',
         shine: 'shine 3s linear infinite',
         'slow-spin': 'slow-spin 20s linear infinite',
-        'move-forever': 'move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite'
+        'move-forever': 'move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite',
+        'zoomIn': 'zoomIn 0.5s ease-out'
       },
       boxShadow: {
         'glow': '0 0 8px rgba(255, 255, 255, 0.5)'

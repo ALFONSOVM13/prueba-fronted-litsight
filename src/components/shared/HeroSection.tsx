@@ -10,7 +10,7 @@ export default function HeroSection() {
         <div className="content-container">
           <div className="pokemon-data" role="presentation">
             <div className="max-w-[26.13rem] max-[1150px]:max-w-[37.5rem] max-[1150px]:text-center max-[500px]:text-left">
-              <h1 className="text-[4rem] text-white leading-[135%] font-bold uppercase max-[500px]:text-[3rem]">
+              <h1 className="text-[4rem] text-light leading-[135%] font-bold uppercase max-[500px]:text-[3rem]">
                 POKEDEX KANTO
               </h1>
               <p className="text-base text-gray-200 leading-[150%] font-normal mb-6">

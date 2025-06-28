@@ -70,6 +70,8 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
   onNext,
   hasPrevious,
   hasNext,
+  previousPokemon,
+  nextPokemon,
   onPokemonChange,
 }) => {
   const baseType = pokemon.types[0]?.type.name || "normal";
@@ -77,6 +79,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
   const [evolutionChain, setEvolutionChain] = useState<EvolutionChain | null>(null);
   const [loadingEvolutions, setLoadingEvolutions] = useState(false);
   const [loadingPokemon, setLoadingPokemon] = useState(false);
+  const [shouldAnimate, setShouldAnimate] = useState(true);
 
   /**
    * Efecto que controla el scroll del body cuando el modal está abierto
@@ -109,6 +112,12 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
     getEvolutionChain();
   }, [pokemon.id]);
 
+  useEffect(() => {
+    setShouldAnimate(true);
+    const timer = setTimeout(() => setShouldAnimate(false), 500);
+    return () => clearTimeout(timer);
+  }, [pokemon.id]);
+
   /**
    * Maneja el click en una evolución del Pokémon
    * @param {number} pokemonId - ID del Pokémon seleccionado en la cadena de evolución
@@ -138,8 +147,8 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-0 md:p-4 z-50">
-      <div className="bg-white overflow-hidden rounded-none md:rounded-3xl w-full h-full md:h-auto md:max-h-[95vh] max-w-6xl flex flex-col relative">
+    <div className="fixed inset-0 bg-dark bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-0 md:p-4 z-50">
+      <div className="bg-light overflow-hidden rounded-none md:rounded-3xl w-full h-full md:h-auto md:max-h-[95vh] max-w-6xl flex flex-col relative">
         <div
           style={{ backgroundColor: getTypeColor(baseType) }}
           className={`sticky top-0 z-20 px-8 py-4 flex justify-between items-center`}
@@ -149,13 +158,13 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
               variant="ghost"
               onClick={onClose}
             >
-              <X className="w-6 h-6 text-white" />
+              <X className="w-6 h-6 text-light" />
             </Button>
-            <h2 className="text-2xl font-bold text-white capitalize">
+            <h2 className="text-2xl font-bold text-light capitalize">
               {pokemon.name}
             </h2>
           </div>
-          <p className="text-white text-xl font-bold">
+          <p className="text-light text-xl font-bold">
             #{pokemon.id.toString().padStart(3, "0")}
           </p>
         </div>
@@ -167,13 +176,24 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
           >
             <div className="relative flex items-center justify-center h-80">
               {hasPrevious && (
-                <Button
-                  variant="ghost"
-                  onClick={onPrevious}
-                  className="absolute left-0 md:left-32 top-1/2 transform -translate-y-1/2 !p-3 rounded-r-full md:rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors z-10"
-                >
-                  <ChevronLeft className="w-8 h-8 text-white" />
-                </Button>
+                <>
+                  <Button
+                    variant="ghost"
+                    onClick={onPrevious}
+                    className="absolute left-0 md:left-32 top-1/2 transform -translate-y-1/2 !p-3 rounded-r-full md:rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors z-10"
+                  >
+                    <ChevronLeft className="w-8 h-8 text-light" />
+                  </Button>
+                  {previousPokemon && (
+                    <div className="absolute left-0 md:left-24 top-1/3 transform -translate-y-1/2 opacity-20 transition-opacity duration-300 hover:opacity-40">
+                      <img
+                        src={previousPokemon.sprites.other["official-artwork"].front_default || previousPokemon.sprites.front_default}
+                        alt={previousPokemon.name}
+                        className="w-32 h-32 object-contain filter brightness-0 invert"
+                      />
+                    </div>
+                  )}
+                </>
               )}
 
               <div className="relative z-10">
@@ -185,23 +205,34 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
                       pokemon.sprites.front_default
                     }
                     alt={pokemon.name}
-                    className="w-48 h-48 object-contain relative z-10"
+                    className={`w-48 h-48 object-contain relative z-10 ${shouldAnimate ? 'animate-zoomIn' : ''}`}
                   />
                 </div>
               </div>
 
               {hasNext && (
-                <Button
-                  variant="ghost"
-                  onClick={onNext}
-                  className="absolute right-0 md:right-32 top-1/2 transform -translate-y-1/2 !p-3 rounded-l-full md:rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors z-10"
-                >
-                  <ChevronRight className="w-8 h-8 text-white" />
-                </Button>
+                <>
+                  <Button
+                    variant="ghost"
+                    onClick={onNext}
+                    className="absolute right-0 md:right-32 top-1/2 transform -translate-y-1/2 !p-3 rounded-l-full md:rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-colors z-10"
+                  >
+                    <ChevronRight className="w-8 h-8 text-light" />
+                  </Button>
+                  {nextPokemon && (
+                    <div className="absolute right-0 md:right-24 top-1/3 transform -translate-y-1/2 opacity-20 transition-opacity duration-300 hover:opacity-40">
+                      <img
+                        src={nextPokemon.sprites.other["official-artwork"].front_default || nextPokemon.sprites.front_default}
+                        alt={nextPokemon.name}
+                        className="w-32 h-32 object-contain filter brightness-0 invert"
+                      />
+                    </div>
+                  )}
+                </>
               )}
             </div>
 
-            <div className="flex justify-center gap-8 text-white mb-4">
+            <div className="flex justify-center gap-8 text-light mb-4">
               <Button
                 variant="ghost"
                 onClick={() => setActiveTab("about")}
@@ -241,8 +272,8 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
           <div className="bg-white rounded-t-3xl -mt-8 relative w-full px-12 py-10">
             {activeTab === "about" && (
               <div className="space-y-8">
-                <div className="bg-white p-6 rounded-2xl shadow-sm">
-                  <h3 className="text-lg font-semibold mb-4">Tipos</h3>
+                <div className="bg-light p-6 rounded-2xl shadow-sm">
+                  <h3 className="text-lg text-dark font-semibold mb-4">Tipos</h3>
                   <PokemonTypes types={pokemon.types} />
                 </div>
                 
@@ -252,9 +283,7 @@ const PokemonDetail: React.FC<PokemonDetailProps> = ({
                   baseExperience={pokemon.base_experience}
                 />
 
-                <div className="bg-white p-6 rounded-2xl shadow-sm">
                   <PokemonAbilities abilities={pokemon.abilities} />
-                </div>
               </div>
             )}
 

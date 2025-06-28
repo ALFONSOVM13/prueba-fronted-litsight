@@ -111,7 +111,7 @@ export const StatsHexagon: React.FC<StatsHexagonProps> = ({ stats }) => {
               top: `${(y / size) * 100}%`,
             }}
           >
-            <span className="bg-white/80 px-1 py-0.5 rounded">
+            <span className="bg-light text-dark px-1 py-0.5 rounded">
               {stat.name}
               <span className={`ml-1 font-bold ${getStatColor(stat.value)}`}>{stat.value}</span>
             </span>

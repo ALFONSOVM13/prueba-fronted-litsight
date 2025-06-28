@@ -3,7 +3,7 @@
 import { usePokemonList } from "@/hooks/usePokemonList";
 import { PokemonService } from "@/services/pokemonService";
 import type { Pokemon } from "@/types/pokemon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Pagination from "../../shared/Pagination";
 import { Loader } from "../../ui/Loader";
 import PokemonDetail from "../DetailsPokemon";
@@ -86,6 +86,40 @@ export default function HomePage() {
   const hasPrevious = currentIndex > 1;
   const hasNext = currentIndex < parseInt(process.env.NEXT_PUBLIC_POKEMON_LIMIT || "151");
 
+  // Cargar los Pokémon anterior y siguiente de manera asíncrona
+  const [previousPokemon, setPreviousPokemon] = useState<Pokemon | undefined>();
+  const [nextPokemon, setNextPokemon] = useState<Pokemon | undefined>();
+
+  useEffect(() => {
+    const loadAdjacentPokemon = async () => {
+      if (!selectedPokemon) return;
+
+      if (hasPrevious) {
+        try {
+          const prevPokemon = await PokemonService.getPokemon((selectedPokemon.id - 1).toString());
+          setPreviousPokemon(prevPokemon);
+        } catch (error) {
+          console.error("Error al cargar el Pokémon anterior:", error);
+        }
+      } else {
+        setPreviousPokemon(undefined);
+      }
+
+      if (hasNext) {
+        try {
+          const nextPokemon = await PokemonService.getPokemon((selectedPokemon.id + 1).toString());
+          setNextPokemon(nextPokemon);
+        } catch (error) {
+          console.error("Error al cargar el Pokémon siguiente:", error);
+        }
+      } else {
+        setNextPokemon(undefined);
+      }
+    };
+
+    loadAdjacentPokemon();
+  }, [selectedPokemon, hasPrevious, hasNext]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-4">
@@ -165,8 +199,8 @@ export default function HomePage() {
           onNext={handleNext}
           hasPrevious={hasPrevious}
           hasNext={hasNext}
-          previousPokemon={undefined}
-          nextPokemon={undefined}
+          previousPokemon={previousPokemon}
+          nextPokemon={nextPokemon}
           onPokemonChange={(newPokemon) => {
             setSelectedPokemon(newPokemon);
           }}

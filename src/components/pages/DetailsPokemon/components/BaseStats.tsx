@@ -36,7 +36,7 @@ export const BaseStats: React.FC<BaseStatsProps> = ({ stats, baseType }) => {
         <div key={stat.stat.name} className="flex items-center gap-4">
           <div className="flex items-center gap-3 w-36">
             <div
-              className="p-2 rounded-lg text-white"
+              className="p-2 rounded-lg text-light"
               style={{ backgroundColor: getTypeColor(baseType) }}
             >
               {statIcons[stat.stat.name]}
@@ -75,7 +75,7 @@ export const BaseStats: React.FC<BaseStatsProps> = ({ stats, baseType }) => {
       <div className="flex items-center gap-4 mt-4">
         <div className="flex items-center gap-3 w-36">
           <div
-            className="p-2 rounded-lg text-white"
+            className="p-2 rounded-lg text-light"
             style={{ backgroundColor: getTypeColor(baseType) }}
           >
             <Zap className="w-4 h-4" />

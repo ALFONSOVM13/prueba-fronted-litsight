@@ -27,7 +27,7 @@ export function LoaderProvider({ children }: { children: ReactNode }) {
                   </div>
                 </div>
               </div>
-              <p className="text-white text-lg">Cargando...</p>
+              <p className="text-light text-lg">Cargando...</p>
             </div>
           </div>
         </div>

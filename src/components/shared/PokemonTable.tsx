@@ -44,19 +44,19 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
     columnHelper.accessor("id", {
       header: "Número",
       cell: (info) => (
-        <span className="font-medium text-xs sm:text-sm">#{String(info.getValue()).padStart(3, '0')}</span>
+        <span className="font-medium text-xs sm:text-sm text-gray-900">#{String(info.getValue()).padStart(3, '0')}</span>
       ),
     }),
     columnHelper.accessor("name", {
       header: "Nombre",
       cell: (info) => (
-        <span className="font-medium capitalize text-xs sm:text-sm">{info.getValue()}</span>
+        <span className="font-medium capitalize text-xs sm:text-sm text-gray-900">{info.getValue()}</span>
       ),
     }),
     columnHelper.accessor("types", {
       header: "Tipos",
       cell: (info) => (
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1 text-gray-900 justify-center">
           {info.getValue().map((type: PokemonType, index: number) => {
             const typeInfo = POKEMON_TYPES.find(t => t.id === type.type.name);
             return (
@@ -83,13 +83,13 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
     columnHelper.accessor("weight", {
       header: "Peso (kg)",
       cell: (info) => (
-        <span className="text-xs sm:text-sm">{`${(info.getValue() / 10).toFixed(1)} kg`}</span>
+        <span className="text-xs sm:text-sm text-gray-900">{`${(info.getValue() / 10).toFixed(1)} kg`}</span>
       ),
     }),
     columnHelper.accessor("height", {
       header: "Altura (m)",
       cell: (info) => (
-        <span className="text-xs sm:text-sm">{`${(info.getValue() / 10).toFixed(1)} m`}</span>
+        <span className="text-xs sm:text-sm text-gray-900">{`${(info.getValue() / 10).toFixed(1)} m`}</span>
       ),
     }),
     columnHelper.accessor("stats", {
@@ -97,7 +97,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Salud Base",
       cell: (info) => {
         const hpStat = info.getValue().find((stat) => stat.stat.name === "hp");
-        return hpStat?.base_stat || 0;
+        return <span className="text-gray-900">{hpStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const hpA = rowA.original.stats.find((stat) => stat.stat.name === "hp")?.base_stat || 0;
@@ -107,14 +107,14 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
     }),
     columnHelper.accessor("base_experience", {
       header: "Experiencia Base",
-      cell: (info) => info.getValue() || "N/A",
+      cell: (info) => <span className="text-gray-900">{info.getValue() || "N/A"}</span>,
     }),
     columnHelper.accessor("stats", {
       id: "attack",
       header: "Ataque Base",
       cell: (info) => {
         const attackStat = info.getValue().find((stat) => stat.stat.name === "attack");
-        return attackStat?.base_stat || 0;
+        return <span className="text-gray-900">{attackStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const attackA = rowA.original.stats.find((stat) => stat.stat.name === "attack")?.base_stat || 0;
@@ -127,7 +127,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Defensa Base",
       cell: (info) => {
         const defenseStat = info.getValue().find((stat) => stat.stat.name === "defense");
-        return defenseStat?.base_stat || 0;
+        return <span className="text-gray-900">{defenseStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const defenseA = rowA.original.stats.find((stat) => stat.stat.name === "defense")?.base_stat || 0;
@@ -140,7 +140,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Ataque Especial",
       cell: (info) => {
         const specialAttackStat = info.getValue().find((stat) => stat.stat.name === "special-attack");
-        return specialAttackStat?.base_stat || 0;
+        return <span className="text-gray-900">{specialAttackStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const specialAttackA = rowA.original.stats.find((stat) => stat.stat.name === "special-attack")?.base_stat || 0;
@@ -153,7 +153,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Defensa Especial",
       cell: (info) => {
         const specialDefenseStat = info.getValue().find((stat) => stat.stat.name === "special-defense");
-        return specialDefenseStat?.base_stat || 0;
+        return <span className="text-gray-900">{specialDefenseStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const specialDefenseA = rowA.original.stats.find((stat) => stat.stat.name === "special-defense")?.base_stat || 0;
@@ -166,7 +166,7 @@ export function PokemonTable({ data, onViewDetails, sorting, onSortingChange }: 
       header: "Velocidad",
       cell: (info) => {
         const speedStat = info.getValue().find((stat) => stat.stat.name === "speed");
-        return speedStat?.base_stat || 0;
+        return <span className="text-gray-900">{speedStat?.base_stat || 0}</span>;
       },
       sortingFn: (rowA, rowB) => {
         const speedA = rowA.original.stats.find((stat) => stat.stat.name === "speed")?.base_stat || 0;

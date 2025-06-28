@@ -99,10 +99,10 @@ export const PokemonCard = ({
                          transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/stat:translate-x-full transition-transform duration-700" />
-              <Weight className="w-5 h-5 text-white" />
-              <span className="font-bold text-white text-sm">{`${pokemon.weight / 10} kg`}</span>
+              <Weight className="w-5 h-5 text-light" />
+              <span className="font-bold text-light text-sm">{`${pokemon.weight / 10} kg`}</span>
             </div>
-            <span className="text-xs text-white mt-2 font-medium group-hover/stat:text-slate-300 transition-colors duration-300">
+            <span className="text-xs text-light mt-2 font-medium group-hover/stat:text-slate-300 transition-colors duration-300">
               Peso
             </span>
           </div>
@@ -114,10 +114,10 @@ export const PokemonCard = ({
                          transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/stat:translate-x-full transition-transform duration-700" />
-              <Ruler className="w-5 h-5 text-white" />
-              <span className="font-bold text-white text-sm">{`${pokemon.height / 10} m`}</span>
+              <Ruler className="w-5 h-5 text-light" />
+              <span className="font-bold text-light text-sm">{`${pokemon.height / 10} m`}</span>
             </div>
-            <span className="text-xs text-white mt-2 font-medium group-hover/stat:text-slate-300 transition-colors duration-300">
+            <span className="text-xs text-light mt-2 font-medium group-hover/stat:text-slate-300 transition-colors duration-300">
               Altura
             </span>
           </div>
@@ -126,7 +126,7 @@ export const PokemonCard = ({
 
       <button
         className="w-full h-16 flex justify-center items-center gap-3 
-                   text-base font-bold text-white rounded-b-3xl
+                   text-base font-bold text-light rounded-b-3xl
                    relative overflow-hidden group/button
                    hover:shadow-lg transition-all duration-300"
         style={{
